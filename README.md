@@ -148,6 +148,97 @@ Per-section min year, min rating, and min vote count. Fine-tune what gets throug
   <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/11-section-filters.jpg" alt="Section Filters" width="100%">
 </p>
 
+### Live Logs — السجلات المباشرة
+Real-time sync and download logs with progress bars. Monitor what's happening right now — sync enrichment, download speed, file status.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/12-live-logs.jpg" alt="Live Logs" width="100%">
+</p>
+
+### Kill All — إيقاف كل العمليات
+Emergency stop for all running downloads and sync operations. Confirms before killing to prevent accidental interruption.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/13-kill-all.jpg" alt="Kill All" width="100%">
+</p>
+
+### Live Status — حالة السيستم
+Live dashboard showing sync progress, download queue, active jobs, and system health in real-time.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/14-live-status.jpg" alt="Live Status" width="100%">
+</p>
+
+### Bandwidth Statistics — إحصائيات الباندويدث
+Track download volume: today, this week, this month. 14-day bar chart with per-day breakdown.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/15-bandwidth-stats.jpg" alt="Bandwidth Stats" width="80%">
+</p>
+
+### Filter Breakdown — تفصيل الفلاتر
+See exactly how many items are in each status (pending, accepted, rejected, excluded) per section. Understand your filter pipeline at a glance.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/16-filter-breakdown.jpg" alt="Filter Breakdown" width="80%">
+</p>
+
+### Accept Dialog — نافذة القبول
+When accepting a series, choose exactly what to download: Everything (all episodes), New only (future episodes), or Custom range (pick season & episode). Shows total episode count per season.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/17-accept-dialog.jpg" alt="Accept Dialog" width="80%">
+</p>
+
+### Add Section — إضافة قسم جديد
+Create new content sections with IPTV category IDs, download folder, and custom filters. Visual folder picker — no manual path typing needed.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/18-add-section.jpg" alt="Add Section" width="80%">
+</p>
+
+### Section Settings — إعدادات القسم
+Edit section name, manage IPTV categories, change download folder, toggle strict filters. Quick access from the gear icon on the dashboard.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/19-section-settings.jpg" alt="Section Settings" width="100%">
+</p>
+
+### Dark Mode — الوضع الليلي
+Full dark theme that auto-switches at night (6pm-6am). Manual toggle with the theme button. Saves preference in localStorage.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/20-dark-mode.jpg" alt="Dark Mode" width="100%">
+</p>
+
+### Light Mode — الوضع النهاري
+Clean light theme for daytime use. All UI elements, cards, and modals adapt to the current theme.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/21-light-mode.jpg" alt="Light Mode" width="100%">
+</p>
+
+### Download Settings — إعدادات التحميل
+Configure download root folder, aria2c connections (parallel download streams), daily download limit, trash folder location, and auto-restart on slow speed.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/22-settings-download.jpg" alt="Download Settings" width="100%">
+</p>
+
+### Advanced Settings — إعدادات متقدمة
+GitHub auto-update configuration, VAPID keys for push notifications, remote control password, and publish settings.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/23-settings-advanced.jpg" alt="Advanced Settings" width="100%">
+</p>
+
+### Browse & Exclude — تصفح واستبعد
+Browse all content from your IPTV provider visually. Reject items directly from the browse view without waiting for sync.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/24-browse-exclude.jpg" alt="Browse & Exclude" width="100%">
+</p>
+
 ---
 
 ## Architecture | البنية
@@ -212,8 +303,10 @@ Access: https://iptv.local  (mDNS — no hosts file needed)
 | **Exclusion Reason** | Clear badge showing why an item was auto-excluded |
 | **Accept / Reject** | One-click action buttons on card hover |
 | **Episode Picker** | For series: choose starting season & episode from live dropdown |
+| **Accept Modes** | **Everything** (all episodes), **New only** (future), **Custom** (pick range S01E01-S03E05) |
 | **Force Accept** | Override filters and accept excluded items manually |
 | **Reject Group** | Reject all duplicate/sibling entries at once |
+| **Groups Only** | Choose which IPTV variant/quality version to download |
 
 ### Smart Filters | الفلاتر الذكية
 
@@ -248,12 +341,39 @@ Access: https://iptv.local  (mDNS — no hosts file needed)
 | Feature | Description |
 |---------|-------------|
 | **aria2c Engine** | Fast multi-connection downloads with automatic resume |
+| **aria2c Connections** | Configurable parallel connections per download (default 16) |
 | **Smart Scheduling** | Automatic download every 40 minutes via cron |
 | **Dashboard Controls** | Start / Stop / Kill All buttons in toolbar |
+| **Auto-Restart** | Automatically restarts downloads that stall below speed threshold |
 | **Integrity Check** | Every 12 hours — verifies files, resumes partials, detects corruption |
 | **Bandwidth Tracking** | Daily, weekly, monthly volume with 14-day chart |
 | **Season/Episode Filter** | Download only chosen ranges (e.g. Season 3+ or S5E1-E5) |
 | **Variant Selection** | Pick preferred quality when duplicates exist |
+| **Trash Folder** | Deleted media goes to configurable trash before permanent removal |
+| **Download Root** | Parent folder containing all section media folders |
+
+### Monitoring & Logs | المراقبة والسجلات
+
+| Feature | Description |
+|---------|-------------|
+| **Live Logs** | Real-time sync & download logs with auto-scroll |
+| **Sync Progress** | Stage-by-stage sync status (fetching, enriching, filtering, saving) |
+| **Download Progress** | Speed, size, ETA, and visual progress bar per file |
+| **Full Log Export** | Export all logs as JSON (up to 500 lines per source) |
+| **System Statistics** | Total series, decisions, downloads, bandwidth, DB size |
+| **Bandwidth Charts** | 14-day download chart + today/week/month breakdown |
+| **Filter Breakdown** | Per-section count of pending/accepted/rejected/excluded items |
+| **Disk Usage** | Per-section folder size on disk |
+| **Smart Polling** | Fast polling when active, slow when idle, paused when tab hidden |
+
+### Theme System | نظام المظهر
+
+| Feature | Description |
+|---------|-------------|
+| **Auto Mode** | Light during day (6am-6pm), dark at night — automatic |
+| **Manual Toggle** | Click theme button to cycle: Auto → Dark → Light |
+| **Full Coverage** | All cards, modals, settings, and pages adapt to theme |
+| **Persistence** | Theme preference saved in localStorage |
 
 ### Settings Panel | لوحة الإعدادات
 
