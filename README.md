@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/01-dashboard-main.png" alt="IPTV Manager Dashboard" width="100%">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/01-dashboard-main.jpg" alt="IPTV Manager Dashboard" width="100%">
 </p>
 
 <h1 align="center">IPTV Manager</h1>
@@ -20,10 +20,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-Windows%20|%20macOS%20|%20Linux-informational?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python" alt="Python">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker" alt="Docker">
+  <img src="https://img.shields.io/badge/Python-3.12-blue?style=flat-square&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/HTTPS-Auto--SSL-green?style=flat-square&logo=letsencrypt" alt="HTTPS">
   <img src="https://img.shields.io/badge/PWA-Supported-orange?style=flat-square" alt="PWA">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
 </p>
 
 ---
@@ -48,84 +49,139 @@ After subscribing to multiple IPTV services, the experience was frustrating:
 
 ---
 
+## Quick Start | البداية السريعة
+
+```bash
+# One command to run on any OS
+docker run -d \
+  --name iptv-manager \
+  --restart unless-stopped \
+  -p 443:443 \
+  -v iptv-data:/app/data \
+  -v /path/to/your/media:/media \
+  -e TZ=Africa/Cairo \
+  iptv-manager
+
+# Open: https://iptv.local
+```
+
+**Windows?** Download and run [`setup-docker.bat`](../../releases/latest) — it does everything for you.
+
+---
+
 ## Screenshots | صور الشاشة
 
 ### Dashboard — لوحة التحكم
 The main interface where you browse, review, and manage all your content. Sections organized as tabs with item counts, status filters, and sorting options.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/01-dashboard-main.png" alt="Dashboard" width="100%">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/01-dashboard-main.jpg" alt="Dashboard" width="100%">
 </p>
 
-### Movie & Series Cards — بطاقات الأفلام والمسلسلات
-Each card shows the poster, IMDb rating badge, vote count, genres, year, and country. High-quality covers auto-downloaded from TMDB.
+### Accept / Reject — قبول / رفض
+Hover over any card to see action buttons. One click to accept for download or reject.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/02-movie-cards.png" alt="Movie Cards" width="100%">
-</p>
-
-### Accept / Reject / Watched — قبول / رفض / مشاهدة
-Hover over any card to see action buttons. One click to accept for download, reject, or mark as watched.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/03-accept-reject-hover.png" alt="Accept Reject Hover" width="100%">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/02-accept-reject.jpg" alt="Accept Reject" width="100%">
 </p>
 
 ### Statistics Panel — لوحة الإحصائيات
-Full system statistics: total series tracked, decisions made, downloads completed, bandwidth usage (daily/weekly/monthly), disk usage, and a 14-day download chart.
+Full system statistics: total series tracked, decisions made, downloads completed, bandwidth usage (daily/weekly/monthly), and a 14-day download chart.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/04-statistics.png" alt="Statistics" width="80%">
-</p>
-
-### Settings — الإعدادات
-Complete control panel with 6 tabs: General, Exclusions, Section Filters, Banned Keywords, Browse & Exclude, and Backups.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/05-settings-general.png" alt="Settings General" width="100%">
-</p>
-
-### Country / Genre / Language Exclusions — استبعاد حسب الدولة والنوع واللغة
-Add countries, genres, or languages to the exclusion list. Items matching these rules are automatically filtered out with a clear reason shown in the Excluded tab.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/06-settings-exclusions.png" alt="Exclusions" width="100%">
-</p>
-
-### Banned Keywords — الكلمات المحظورة
-Set keywords per section to auto-exclude or auto-reject matching titles. Retroactively applies to all existing pending items.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/07-settings-banned-keywords.png" alt="Banned Keywords" width="100%">
-</p>
-
-### Backup & Restore — النسخ الاحتياطي والاسترجاع
-Automatic daily backups with full restore capability. Download, upload, or restore any backup with one click. Safety backups are created before every restore.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/08-settings-backups.png" alt="Backups" width="100%">
-</p>
-
-### Edit Section + Browse Folders — تعديل القسم + تصفح المجلدات
-Edit section settings with a visual folder picker. Browse existing download folders directly from the UI instead of typing paths manually.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/09-edit-section-browse.png" alt="Edit Section Browse" width="80%">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/03-statistics.jpg" alt="Statistics" width="80%">
 </p>
 
 ### Excluded Tab — تاب المستبعد
 Every auto-excluded item shows the reason it was filtered (low rating, low votes, region, genre, language, banned keyword). Nothing disappears — everything is traceable.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/10-excluded-tab.png" alt="Excluded Tab" width="100%">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/04-excluded-tab.jpg" alt="Excluded Tab" width="100%">
+</p>
+
+### Exclusion Rules — قواعد الاستبعاد
+Add countries, genres, or languages to the exclusion list. Items matching these rules are automatically filtered out.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/05-exclusions.jpg" alt="Exclusions" width="100%">
+</p>
+
+### Section Rules — قواعد لكل قسم
+Set banned keywords per section to auto-exclude or auto-reject matching titles. Retroactively applies to all existing pending items.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/06-section-rules.jpg" alt="Section Rules" width="100%">
+</p>
+
+### Backup & Restore — النسخ الاحتياطي والاسترجاع
+Automatic daily backups with full restore capability. Download, upload, or restore any backup with one click.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/07-backups.jpg" alt="Backups" width="100%">
+</p>
+
+### Database Browser — متصفح قاعدة البيانات
+Built-in phpMyAdmin-style database browser. View all tables, row counts, run SQL queries, maintenance, and repair covers.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/08-database-browser.jpg" alt="Database Browser" width="100%">
+</p>
+
+### Global Search — البحث الشامل
+Search across ALL sections by title. Results grouped by section with thumbnails, ratings, and status badges.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/09-search.jpg" alt="Search" width="100%">
 </p>
 
 ### Mobile PWA — تطبيق الموبايل
 Fully responsive design that works as a Progressive Web App. Install it on your phone's home screen for a native app experience with push notifications.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/11-mobile-view.png" alt="Mobile View" width="300">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/10-mobile.jpg" alt="Mobile View" width="300">
 </p>
+
+### Section Filters — فلاتر الأقسام
+Per-section min year, min rating, and min vote count. Fine-tune what gets through the auto-filter for each section independently.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/egphp/iptv-manager-updates/main/screenshots/11-section-filters.jpg" alt="Section Filters" width="100%">
+</p>
+
+---
+
+## Architecture | البنية
+
+```
+┌──────────────────────────────────────────┐
+│         Docker Container (Alpine)        │
+│                                          │
+│  ┌──────────────┐  ┌──────────────────┐  │
+│  │  Cheroot      │  │   dcron          │  │
+│  │  HTTPS :443   │  │  sync/dl/check   │  │
+│  │  (auto-SSL)   │  │  (Alpine cron)   │  │
+│  └──────────────┘  └──────────────────┘  │
+│                                          │
+│  /app         (code — read-only layer)   │
+│  /app/data    (DB, covers, certs)  ← VOL │
+│  /media       (download target)    ← MNT │
+└──────────────────────────────────────────┘
+
+Access: https://iptv.local  (mDNS — no hosts file needed)
+```
+
+| Component | Technology |
+|-----------|-----------|
+| **Runtime** | Docker (Alpine Linux + Python 3.12) |
+| **Web Server** | Cheroot WSGI (native SSL, thread-pooled) |
+| **Framework** | Flask |
+| **Database** | SQLite (normalized v2 schema) |
+| **Downloads** | aria2c (multi-connection, resume, 40 MB/s+) |
+| **Metadata** | TMDB API + OMDb API |
+| **Push** | Web Push (VAPID) via pywebpush |
+| **Discovery** | mDNS (iptv.local — zero-config LAN access) |
+| **Frontend** | Vanilla JS + CSS3 (no frameworks) |
+| **Compression** | Pre-gzipped static files (75% smaller) |
 
 ---
 
@@ -135,225 +191,263 @@ Fully responsive design that works as a Progressive Web App. Install it on your 
 
 | Feature | Description |
 |---------|-------------|
-| **Web Dashboard** | Modern dark-themed responsive UI with glass morphism design |
+| **Web Dashboard** | Modern responsive UI with light/dark theme (auto switches day/night) |
 | **PWA Support** | Install as native app on mobile/desktop with push notifications |
-| **Global Search** | Search across all sections by title, genre, or country |
-| **Multi-Section Tabs** | Organize content by category (Arabic, Turkish, English, Movies, Ramadan, etc.) |
-| **6 Status Tabs** | Pending, Accepted, Rejected, Watched, Excluded, Excluded but Rich |
-| **Sort Options** | Sort by newest, highest rated, or most voted |
-| **Infinite Scroll** | Smooth lazy-loading with IntersectionObserver |
-| **Keyboard Shortcuts** | `S` to search, `1-9` to switch sections, `Escape` to close |
-| **Section Enable/Disable** | Pause downloads for specific sections without losing data |
+| **Global Search** | Search across all sections by title — results grouped by section |
+| **Multi-Section Tabs** | Organize content by category (English Movies, Foreign Series, Turkish, Ramadan, Arabic, etc.) |
+| **5 Status Tabs** | Pending, Accepted, Rejected, Excluded — each with item count badge |
+| **Sort & Filter** | Sort by newest, highest rated. Filter by genre, country |
+| **Grid / List View** | Toggle between card grid and compact list |
+| **Keyboard Shortcuts** | `S` to search, `1-9` to switch sections, `Esc` to close |
 | **New Items Badge** | Pulsing gold dot on section tabs when new pending items appear |
+| **Section Settings Gear** | Quick-edit section name, categories, download folder from dashboard |
 
 ### Content Cards | بطاقات المحتوى
 
 | Feature | Description |
 |---------|-------------|
-| **IMDb Rating Badge** | Color-coded IMDb rating displayed on every card (links to IMDb page) |
+| **IMDb Rating Badge** | Color-coded IMDb rating on every card (links to IMDb page) |
 | **Vote Count** | Formatted vote count (e.g. 36.7K, 1.2M) |
-| **Genres & Country** | Full metadata line under each title |
+| **Genres & Country** | Full metadata under each title |
 | **Exclusion Reason** | Clear badge showing why an item was auto-excluded |
-| **Track Info** | For accepted series: shows starting episode (e.g. S2E5) |
-| **Accept / Reject / Watched** | One-click action buttons on card hover |
-| **Episode Picker** | For series: choose starting episode from a live dropdown |
+| **Accept / Reject** | One-click action buttons on card hover |
+| **Episode Picker** | For series: choose starting season & episode from live dropdown |
 | **Force Accept** | Override filters and accept excluded items manually |
-
-### Discovery & Metadata | الاكتشاف والبيانات
-
-| Feature | Description |
-|---------|-------------|
-| **Auto-Sync** | Automatically discovers new series/movies from your IPTV provider |
-| **TMDB Integration** | Fetches ratings, posters, genres, countries, and release dates from TMDB |
-| **OMDb / IMDb** | Cross-references with OMDb for IMDb ratings and additional data |
-| **IMDb Watchlist** | Auto-marks titles from your IMDb watchlist (public URL or CSV export) |
-| **Cover Downloads** | Automatically downloads and caches high-quality poster images |
-| **Duplicate Detection** | For movies: keeps 4K version when both 4K and SD exist |
+| **Reject Group** | Reject all duplicate/sibling entries at once |
 
 ### Smart Filters | الفلاتر الذكية
 
 | Filter | Description |
 |--------|-------------|
-| **Year Filter** | Only include content from a minimum release year |
+| **Year Filter** | Minimum release year per section |
 | **Rating Filter** | Minimum IMDb rating threshold per section |
-| **Vote Count Filter** | Minimum vote count to filter unknown/obscure titles |
+| **Vote Count Filter** | Minimum vote count to filter unknown titles |
 | **Country Exclusion** | Auto-exclude content from specific countries |
-| **Genre Exclusion** | Auto-exclude specific genres (e.g. Animation, Documentary) |
+| **Genre Exclusion** | Auto-exclude specific genres (Animation, Documentary, etc.) |
 | **Language Exclusion** | Auto-exclude by language ISO code |
-| **Banned Keywords** | Auto-exclude titles containing specific keywords |
-| **Pre-Rejected Keywords** | Auto-reject (not just exclude) titles with specific keywords |
-| **Arabic Name Detection** | In English sections: auto-excludes titles with >30% Arabic characters |
-| **Stale Series Detection** | Auto-excludes series with no new episodes in N days |
-| **Skip Strict Filters** | Per-section toggle to bypass metadata/region/votes filtering |
-| **Retroactive Apply** | When you add a new exclusion rule, it immediately applies to all pending items |
+| **Banned Keywords** | Per-section auto-exclude titles containing specific words |
+| **Pre-Rejected Keywords** | Auto-reject (stronger than exclude) per section |
+| **Arabic Detection** | In English sections: auto-excludes titles with >30% Arabic chars |
+| **Stale Series** | Auto-excludes series with no new episodes in N days |
+| **Retroactive Apply** | New exclusion rules immediately apply to all pending items |
 
-### Excluded but Rich | المستبعد لكن مهم
-
-| Feature | Description |
-|---------|-------------|
-| **Smart Detection** | Automatically identifies high-quality excluded items (IMDb >= 6.5 AND >= 20K votes) |
-| **Separate Tab** | Dedicated "Excluded but Rich" tab for easy review |
-| **One-Click Accept** | Force-accept any rich excluded item with a single click |
-
-### Downloads | التحميل
+### Discovery & Metadata | الاكتشاف والبيانات
 
 | Feature | Description |
 |---------|-------------|
-| **aria2c Engine** | Fast multi-connection downloads with automatic resume support |
-| **Terminal Progress Bar** | Beautiful unicode progress bar: `████████░░░░ 65% \| 330/512 MB \| 67.1 Mb/s \| 30s` |
-| **Dashboard Progress** | Real-time download progress with speed, size, ETA, and visual bar |
-| **Integrity Check** | Verifies downloaded files, resumes partial downloads, detects corruption |
-| **Daily Download Limit** | Configurable maximum number of downloads per day |
-| **Bandwidth Tracking** | Daily, weekly, and monthly download volume tracking |
-| **Smart Resume** | Automatically resumes interrupted downloads on restart |
+| **Auto-Sync** | Discovers new series/movies from IPTV provider every 6 hours |
+| **TMDB Integration** | Fetches ratings, posters, genres, countries, release dates |
+| **OMDb / IMDb** | Cross-references for IMDb ratings and additional data |
+| **IMDb Watchlist** | Auto-marks titles from your IMDb watchlist (public URL or CSV) |
+| **Cover Downloads** | Auto-downloads and caches high-quality posters + thumbnails |
+| **Duplicate Detection** | Keeps 4K version when both 4K and SD exist |
+| **Push Notifications** | Get notified when new series are added or downloads complete |
 
-### Section Management | إدارة الأقسام
-
-| Feature | Description |
-|---------|-------------|
-| **Add Section** | Create new sections with IPTV category IDs, download folder, and filters |
-| **Edit Section** | Modify name, download folder, year/rating filters, strict filter toggle |
-| **Delete Section** | Full cascade delete with item count preview and double confirmation |
-| **Browse IPTV Categories** | Load live category list from your IPTV provider |
-| **Browse Download Folders** | Visual folder picker — no manual path typing needed |
-| **Add/Remove Categories** | Dynamically manage IPTV source categories per section |
-| **Movies vs Series** | Separate handling for VOD (movies) and series content |
-
-### Backup System | نظام النسخ الاحتياطي
+### Download Manager | مدير التحميل
 
 | Feature | Description |
 |---------|-------------|
-| **Automatic Daily Backups** | Background thread creates one backup per day automatically |
-| **Manual Backup** | Create instant backups with one click |
-| **Restore from Backup** | Restore any previous backup with safety backup before restore |
-| **Upload & Restore** | Upload a `.db` file from your computer and restore from it |
-| **Download Backups** | Download any backup file to your computer |
-| **Auto-Retention** | Keeps last 3 backups, automatically deletes older ones |
-| **Pre-Restore Safety** | Always creates a safety backup before any restore operation |
+| **aria2c Engine** | Fast multi-connection downloads with automatic resume |
+| **Smart Scheduling** | Automatic download every 40 minutes via cron |
+| **Dashboard Controls** | Start / Stop / Kill All buttons in toolbar |
+| **Integrity Check** | Every 12 hours — verifies files, resumes partials, detects corruption |
+| **Bandwidth Tracking** | Daily, weekly, monthly volume with 14-day chart |
+| **Season/Episode Filter** | Download only chosen ranges (e.g. Season 3+ or S5E1-E5) |
+| **Variant Selection** | Pick preferred quality when duplicates exist |
 
 ### Settings Panel | لوحة الإعدادات
 
 | Tab | What it controls |
 |-----|-----------------|
-| **General** | IPTV connection, API keys (TMDB/OMDb), download root folder, aria2c connections, daily limit, IMDb watchlist/CSV |
-| **Exclusions** | Excluded countries, genres, and languages with tag-based UI |
+| **General** | IPTV connection, API keys (TMDB/OMDb), download root, IMDb watchlist |
+| **Exclusions** | Global excluded countries, genres, languages with tag UI |
 | **Section Filters** | Per-section min year, min rating, min vote count |
-| **Banned Keywords** | Per-section banned keywords (auto-exclude) and pre-rejected keywords (auto-reject) |
-| **Browse & Exclude** | Browse all IPTV content visually and reject items directly |
-| **Backups** | Create, restore, upload, download, and delete backups |
+| **Section Rules** | Per-section banned keywords and pre-rejected keywords |
+| **Browse & Exclude** | Browse all IPTV content visually and reject directly |
+| **Backups** | Create, restore, upload, download, delete backups |
+| **Database** | phpMyAdmin-style browser, maintenance, SQL query, repair covers |
 
-### Monitoring & Logs | المراقبة والسجلات
-
-| Feature | Description |
-|---------|-------------|
-| **Live Sync Log** | Real-time sync progress with visual progress bar and enrichment status |
-| **Live Download Log** | Real-time download progress with speed, size, and ETA |
-| **Full Log Viewer** | Scrollable popup with last 100 log lines per source |
-| **System Logs Panel** | All logs from sync, downloader, and web in one filterable view |
-| **System Check** | One-click file integrity check across all sections |
-| **Smart Polling** | Efficient polling: fast when active, slow when idle, paused when tab hidden |
-
-### Statistics | الإحصائيات
-
-| Metric | Description |
-|--------|-------------|
-| **Total Series** | Number of tracked series/movies across all sections |
-| **Total Decisions** | Total accept/reject/exclude decisions made |
-| **Downloads Count** | Total number of successfully downloaded files |
-| **Bandwidth Today/Week/Month** | Download volume tracking with display in section info bar |
-| **Files Tracked** | Number of files in download history |
-| **DB Size** | Current database size |
-| **Series by Section** | Count breakdown per section |
-| **Decisions by Status** | Color-coded status distribution |
-| **Daily Download Chart** | 14-day bar chart with daily download counts |
-| **Section Disk Usage** | Per-section folder size on disk |
-
----
-
-## Platform Support | المنصات
-
-### Windows
+### Backup System | نظام النسخ الاحتياطي
 
 | Feature | Description |
 |---------|-------------|
-| **Setup Wizard** | One-click `.bat` installer with auto Python/aria2c installation |
-| **System Tray** | Icon next to the clock with right-click menu (Start/Stop/Restart/Settings) |
-| **Watchdog** | Auto-restarts the server if it crashes |
-| **Auto-Update** | Checks GitHub releases every 5 minutes, auto-applies updates |
-| **Startup Launch** | Automatically starts with Windows via startup shortcut |
-| **Firewall Rule** | Auto-creates Windows Firewall exception for port 8888 |
-| **Uninstaller** | Clean uninstall removes all shortcuts, firewall rules, and files |
-| **Cron Scripts** | `run_sync.bat` and `run_downloader.bat` for Task Scheduler |
+| **Automatic Daily** | Background cron creates one backup per day |
+| **Manual Backup** | Create instant backups with one click |
+| **Restore** | Restore any previous backup (safety backup created first) |
+| **Upload & Restore** | Upload a `.db` file from your computer |
+| **Download** | Download any backup file to your computer |
+| **Auto-Retention** | Keeps last 3 backups, deletes older ones |
 
-### macOS
+### Remote Control | التحكم عن بعد
 
 | Feature | Description |
 |---------|-------------|
-| **HTTPS Support** | Built-in SSL with mkcert certificates |
-| **iPhone CA Install** | `/install-ca` endpoint serves root CA for iPhone trust |
-| **Menu Bar App** | Native `.app` bundle with menu bar integration |
-| **Auto-Update** | Background update from GitHub releases |
-| **Cron Scripts** | `run_sync.sh` and `run_downloader.sh` for crontab |
+| **Password Protected** | Separate password for remote access |
+| **24h Token** | Auth tokens expire after 24 hours |
+| **Pending List** | View and approve/reject items remotely |
+| **Download Control** | Start/stop downloader from any device |
+| **CORS Enabled** | Safe cross-origin access from external pages |
 
-### Linux
+### Security | الأمان
 
 | Feature | Description |
 |---------|-------------|
-| **Setup Script** | `setup.sh` checks Python, installs deps, configures permissions |
-| **systemd Service** | Ready-made service template for `iptv-web.service` |
-| **Log Rotation** | Auto-rotates logs at 5MB with crash reason logging |
-| **Auto-Update** | Background update from GitHub releases or LAN source server |
-| **.deb / .rpm** | Package builds for Ubuntu/Debian and RHEL/AlmaLinux |
+| **HTTPS Only** | Auto-generated SSL certificate (valid 10 years) |
+| **Local CA** | Install root CA on devices for green lock (no browser warnings) |
+| **Credential Scanning** | Publish blocks if secrets detected in code |
+| **Parameterized SQL** | All queries use parameters (no injection) |
+| **Path Validation** | Backup names, file paths validated against traversal |
+| **Token Expiry** | Remote tokens expire after 24h |
 
 ---
 
 ## Installation | التسطيب
 
-### Windows
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows/macOS) or Docker Engine (Linux)
+- A media/download folder on your disk
+
+### Windows (One-Click)
 
 ```
-1. Download IPTV_Manager_Windows.zip from Releases
-2. Extract and right-click IPTV_Manager_Setup.bat → Run as Administrator
-3. Follow the setup wizard (IPTV credentials + optional API keys)
-4. System tray icon appears → double-click to open Dashboard
+1. Install Docker Desktop from docker.com
+2. Download setup-docker.bat from Releases
+3. Right-click → Run as Administrator
+4. Enter your media folder path (e.g. D:\Media)
+5. Done! Open https://iptv.local
 ```
+
+The setup script:
+- Pulls the Docker image
+- Creates a persistent data volume
+- Starts the container with auto-restart
+- Auto-migrates data from old native installations
+- Cleans old startup entries and processes
 
 ### macOS
 
-```
-1. Download .zip from Releases
-2. Extract and move to Applications
-3. Launch from Applications → menu bar icon appears
-4. Open https://localhost:8888 in your browser
+```bash
+# Install Docker Desktop from docker.com, then:
+docker run -d --name iptv-manager --restart unless-stopped \
+  -p 443:443 \
+  -v iptv-data:/app/data \
+  -v /Volumes/YourDisk/Media:/media \
+  -e TZ=Africa/Cairo \
+  iptv-manager
 ```
 
 ### Linux
 
 ```bash
-# Ubuntu/Debian
-sudo dpkg -i iptv-manager_*.deb
-sudo systemctl start iptv-manager
+# Install Docker
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER && newgrp docker
 
-# RHEL/AlmaLinux
-sudo rpm -i iptv-manager-*.rpm
-sudo systemctl start iptv-manager
-
-# Manual
-pip3 install flask requests
-python3 series_manager_web.py
+# Run
+docker run -d --name iptv-manager --restart unless-stopped \
+  -p 443:443 \
+  -v iptv-data:/app/data \
+  -v /mnt/media:/media \
+  -e TZ=Africa/Cairo \
+  iptv-manager
 ```
+
+### Docker Compose
+
+```yaml
+services:
+  iptv-manager:
+    image: iptv-manager:latest
+    container_name: iptv-manager
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    volumes:
+      - iptv-data:/app/data
+      - /path/to/your/media:/media   # CHANGE THIS
+    environment:
+      - TZ=Africa/Cairo
+
+volumes:
+  iptv-data:
+```
+
+### First Run
+
+1. Open **https://iptv.local** in your browser
+2. Accept the self-signed certificate warning (one-time)
+3. Go to **Settings** → enter your IPTV credentials
+4. (Optional) Add TMDB/OMDb API keys for richer metadata
+5. Create sections → assign IPTV categories → set download folders
+6. Click **Sync** → new content appears in Pending tab
+7. Accept what you want → downloads start automatically
 
 ---
 
-## Requirements | المتطلبات
+## iPhone / iPad — Install CA Certificate | تركيب الشهادة
 
-| Component | Purpose | Required |
-|-----------|---------|----------|
-| **Python 3.10+** | Core runtime | Yes |
-| **Flask** | Web server | Yes |
-| **aria2c** | Fast multi-connection downloads | Yes |
-| **TMDB API Key** | Movie/series metadata & posters | Optional (recommended) |
-| **OMDb API Key** | IMDb ratings & additional data | Optional (recommended) |
+To get the green lock (no "Not Secure" warning):
+
+1. Open **Safari** (not Chrome — iOS ignores certs from Chrome)
+2. Go to `https://iptv.local/install-ca`
+3. Tap **Allow** to download the profile
+4. Go to **Settings → General → VPN & Device Management**
+5. Find **IPTV Manager CA** → tap **Install**
+6. Go to **Settings → General → About → Certificate Trust Settings**
+7. Enable **IPTV Manager CA**
+8. Go back to Safari → open `https://iptv.local` → green lock!
+
+---
+
+## Docker Details | تفاصيل الدوكر
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `TZ` | `UTC` | Timezone (e.g. `Africa/Cairo`, `America/New_York`) |
+| `IPTV_DATA_DIR` | `/app/data` | Data directory inside container |
+| `PORT` | `443` | HTTPS port |
+
+### Cron Jobs (Automatic)
+
+| Schedule | Job | Description |
+|----------|-----|-------------|
+| Every 40 min | `iptv_downloader.py` | Download accepted series |
+| Every 6 hours | `series_manager_sync.py` | Sync new content from IPTV API |
+| Every 12 hours | `iptv_downloader.py --check` | File integrity verification |
+| Daily midnight | Backup | Auto-backup database |
+
+### Volumes
+
+| Mount | Purpose |
+|-------|---------|
+| `iptv-data:/app/data` | Persistent: DB, covers, certs, backups, logs, trash |
+| `/path/to/media:/media` | Your media disk for downloads |
+
+### Health Check
+
+```
+Interval: 30s | Timeout: 5s | Retries: 3
+Endpoint: https://localhost:443/api/series/hash
+```
+
+### Auto-SSL
+
+On first start, the container automatically:
+1. Generates a local **Root CA** (`rootCA.pem`)
+2. Signs a server certificate (valid 10 years)
+3. Serves the CA at `/install-ca` for device trust
+4. All traffic is HTTPS — no HTTP
+
+### mDNS Discovery
+
+The container advertises itself as **iptv.local** on your LAN via mDNS. No `/etc/hosts` editing needed. Works on:
+- macOS (built-in Bonjour)
+- iOS (built-in)
+- Windows (if Bonjour/iTunes installed)
+- Linux (if avahi-daemon running)
 
 ---
 
@@ -362,21 +456,22 @@ python3 series_manager_web.py
 ```
 ┌─────────────────┐     ┌──────────────┐     ┌────────────────┐
 │   IPTV Provider  │────>│   Auto Sync  │────>│  TMDB / OMDb   │
-│  (Series + VOD)  │     │  (Discover)  │     │  (Enrich Data) │
+│  (Series + VOD)  │     │  (Every 6h)  │     │  (Enrich Data) │
 └─────────────────┘     └──────────────┘     └────────────────┘
                                                       │
                               ┌────────────────────────┘
                               ▼
                     ┌──────────────────┐
                     │  Smart Filters   │
-                    │  (Year, Rating,  │
-                    │   Country, etc.) │
+                    │  Year, Rating,   │
+                    │  Country, Genre  │
+                    │  Keywords, Lang  │
                     └──────────────────┘
                               │
               ┌───────────────┼───────────────┐
               ▼               ▼               ▼
      ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-     │   Pending    │ │   Excluded   │ │  Excluded    │
+     │   Pending    │ │   Excluded   │ │   Excluded   │
      │  (Review)    │ │  (Filtered)  │ │  but Rich    │
      └──────────────┘ └──────────────┘ └──────────────┘
               │
@@ -393,35 +488,62 @@ python3 series_manager_web.py
 
 ---
 
+## Migration from Old Installation | الترقية من النسخة القديمة
+
+If you have an existing native installation (Windows/macOS/Linux):
+
+**Windows:** Just run `setup-docker.bat` — it auto-detects and migrates your database and covers.
+
+**macOS/Linux:**
+```bash
+# 1. Copy your data to Docker volume
+docker volume create iptv-data
+docker run --rm -v iptv-data:/data -v /path/to/old/install:/src alpine sh -c "
+    cp /src/iptv_manager.db /data/
+    cp -r /src/covers /data/
+"
+
+# 2. Start container — paths auto-migrate to /media/*
+docker run -d --name iptv-manager --restart unless-stopped \
+  -p 443:443 -v iptv-data:/app/data -v /mnt/media:/media iptv-manager
+```
+
+The entrypoint automatically converts old paths (e.g. `/Volumes/3TB/Plex/Movies` or `D:\Media\Movies`) to `/media/Movies`.
+
+---
+
 ## Keyboard Shortcuts | اختصارات لوحة المفاتيح
 
 | Key | Action |
 |-----|--------|
 | `S` or `/` | Focus search bar |
 | `1` - `9` | Switch to section 1-9 |
-| `Escape` | Close any open modal or blur input |
+| `Escape` | Close any open modal |
 
 ---
 
 ## API Reference | مرجع الـ API
 
 <details>
-<summary><strong>Click to expand full API list (40+ endpoints)</strong></summary>
+<summary><strong>Click to expand full API list (60+ endpoints)</strong></summary>
 
-### Data & Decisions
+### Series & Decisions
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/series` | All sections, series data, and decisions |
-| GET | `/api/series/hash` | Lightweight polling (MD5 hash) |
-| POST | `/api/series/{id}/accept` | Accept a series/movie |
-| POST | `/api/series/{id}/reject` | Reject a series/movie |
-| POST | `/api/series/{id}/watched_removed` | Mark as watched + delete files |
+| GET | `/api/series` | Paginated series list with counts |
+| GET | `/api/series/hash` | Lightweight polling (data hash) |
+| POST | `/api/series/{id}/accept` | Accept series/movie |
+| POST | `/api/series/{id}/reject` | Reject series/movie |
+| POST | `/api/series/{id}/watched_removed` | Mark watched + delete files |
 | GET | `/api/series/{id}/episodes` | Live episode list from IPTV |
+| GET | `/api/series/{id}/siblings` | Duplicate entries |
+| POST | `/api/series/{id}/reject_group` | Reject all siblings |
 
-### Section Management
+### Sections
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/sections` | Add new section |
+| GET | `/api/categories` | All IPTV categories |
+| POST | `/api/sections` | Create/update section |
 | POST | `/api/sections/{id}/toggle` | Enable/disable section |
 | POST | `/api/sections/{id}/update` | Edit section settings |
 | POST | `/api/sections/{id}/add_category` | Add IPTV category |
@@ -439,63 +561,100 @@ python3 series_manager_web.py
 | POST | `/api/settings/excluded_languages` | Update excluded languages |
 | POST | `/api/settings/excluded_keywords` | Update banned keywords |
 | POST | `/api/settings/pre_rejected_keywords` | Update pre-rejected keywords |
-| POST | `/api/settings/section_filter` | Update section filters |
+| POST | `/api/settings/section_exclusions` | Section-specific rules |
+| POST | `/api/settings/section_filter` | Section filters (year/rating/votes) |
+| GET | `/api/known_values` | All unique genres/countries/languages |
+| GET | `/api/section_breakdown` | Count per status per section |
+| GET | `/api/browse-dirs` | File browser |
+| POST | `/api/upload-csv` | Bulk import CSV decisions |
 
 ### System Control
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/sys/kill` | Kill all processes |
-| POST | `/api/sys/stop_dl` | Stop downloads only |
 | POST | `/api/sys/start_dl` | Start downloads |
-| POST | `/api/sys/sync` | Start sync |
+| POST | `/api/sys/stop_dl` | Pause downloads |
+| POST | `/api/sys/kill` | Force-stop all processes |
+| POST | `/api/sys/sync` | Full IPTV sync |
 | POST | `/api/sys/sync_section` | Sync single section |
+| GET | `/api/sys/sync_status` | Current sync progress |
 | POST | `/api/sys/integrity` | Run integrity check |
+| GET | `/api/sys/status` | Server status |
+| POST | `/api/shutdown` | Graceful shutdown |
+| POST | `/api/restart-server` | Restart server |
 
-### Logs & Stats
+### Logs & Statistics
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/logs` | Last 10 lines sync + download |
-| GET | `/api/log` | Last N lines by type |
-| GET | `/api/logs/full` | Up to 500 rows by source |
+| GET | `/api/logs` | Last N lines sync + download |
+| GET | `/api/logs/full` | Full log export (JSON) |
 | GET | `/api/stats` | System statistics |
-| GET | `/api/bandwidth` | Download bandwidth (day/week/month) |
+| GET | `/api/bandwidth` | Download stats (today/week/month) |
+| GET | `/api/bandwidth/history` | Daily history (date range) |
+| GET | `/api/bandwidth/day` | Detailed day breakdown |
 | GET | `/api/disk_usage` | Per-section disk usage |
+| GET | `/api/download-folders` | Available download locations |
+
+### Search & Trash
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/search?q=...` | Global search (all sections) |
+| GET | `/api/trash` | List trashed items |
+| POST | `/api/trash/delete` | Permanently delete |
+| POST | `/api/trash/restore` | Restore from trash |
+| POST | `/api/repair-covers` | Fix missing covers |
 
 ### Backups
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/backups` | List all backups |
-| POST | `/api/backups/create` | Create manual backup |
+| POST | `/api/backups/create` | Create backup now |
 | POST | `/api/backups/restore` | Restore from backup |
-| POST | `/api/backups/delete` | Delete a backup |
+| POST | `/api/backups/delete` | Delete backup |
 | GET | `/api/backups/download/{name}` | Download backup file |
-| POST | `/api/backups/upload` | Upload and restore from file |
+| POST | `/api/backups/upload` | Upload & restore |
 
-### Browse & Categories
+### Database Browser
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/categories` | All IPTV categories |
-| GET | `/api/browse/{section_id}` | Browse section content |
-| GET | `/api/browse-path` | Directory tree browser |
-| GET | `/api/download-folders` | List download folders |
+| GET | `/api/db/tables` | List all tables |
+| GET | `/api/db/table/{name}` | Paginated table data |
+| POST | `/api/db/query` | Execute SQL query |
+| POST | `/api/db/row/delete` | Delete row |
+| POST | `/api/db/maintenance` | Optimize/vacuum DB |
+
+### Push Notifications
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/push/vapid-key` | Public VAPID key |
+| POST | `/api/push/subscribe` | Register device |
+| POST | `/api/push/unsubscribe` | Unregister device |
+| POST | `/api/push/test` | Send test notification |
+
+### Publishing & Updates
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/publish-update` | Push update to GitHub releases |
+| GET | `/api/heartbeat` | Current version hash |
+| POST | `/api/check-update` | Check for new version |
+
+### Remote Control
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/remote/auth` | Authenticate (get token) |
+| GET | `/api/remote/pending` | Pending items (auth required) |
+| POST | `/api/remote/decide` | Accept/reject remotely |
+| POST | `/api/remote/download` | Control downloader remotely |
+
+### PWA & Assets
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/covers/{file}` | Cover images |
+| GET | `/thumbs/{file}` | Thumbnails (auto-generated) |
+| GET | `/manifest.json` | PWA manifest |
+| GET | `/sw.js` | Service worker |
+| GET | `/install-ca` | Download root CA certificate |
 
 </details>
-
----
-
-## Tech Stack | التقنيات
-
-| Layer | Technology |
-|-------|-----------|
-| **Backend** | Python 3 + Flask |
-| **Database** | SQLite (via `db.py` abstraction layer) |
-| **Frontend** | Vanilla JS + CSS3 (no frameworks, single-file embedded) |
-| **Downloads** | aria2c (multi-connection, resume support) |
-| **Metadata** | TMDB API + OMDb API |
-| **Push** | Web Push (VAPID) via `pywebpush` |
-| **Compression** | Gzip for all JSON responses > 1KB |
-| **SSL** | mkcert for local HTTPS |
-| **System Tray** | pystray + Pillow (Windows) |
 
 ---
 
